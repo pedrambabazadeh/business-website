@@ -25,17 +25,18 @@ Steps to setup and run the application:
 4. Database Commands:
 
     Download SQL Server Management Studio (SSMS) from Microsoft: https://aka.ms/ssmsfullsetup
+
     How to setup SSMS tutorial: https://www.youtube.com/watch?v=SIQhe-yt3mA&list=PL82C6-O4XrHfrGOCPmKmwTO7M0avXyQKc&index=3
 
     dotnet ef migrations add Data
 
     dotnet ef database update
 
-5. Run the program with Swagger to test the end points
+6. Run the program with Swagger to test the end points
 
     dotnet watch run
 
-6. Run the program:
+7. Run the program:
 
     dotnet run
 
@@ -54,13 +55,22 @@ dotnet add package Microsoft.EntityFrameworkCore
 NUGET Packages:
 
 *Requires NUGET Gallery extenstion from pcislo
+
 *Check version in API.csproj: <TargetFramework>net8.0</TargetFramework>
 
+
 Microsoft.EntityFrameworkCore.SqlServer
+
 Microsoft.EntityFrameworkCore.Tools
+
 Microsoft.EntityFrameworkCore.Design
+
 Microsoft.AspNetCore.Mvc.NewtonsoftJson
+
 newtonsoft.Json
+
 Microsoft.Extensions.identity.core
+
 Microsoft.AspNetCore.Identity.EntityFrameworkCore
+
 Microsoft.AspNetCore.Authentication.JwtBearer
