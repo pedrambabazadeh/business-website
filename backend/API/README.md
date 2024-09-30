@@ -6,7 +6,7 @@ Steps to setup and run the application:
 
 1. Navigate to the API directory:
 
-    cd .\API\
+    cd .\backend\API\
 
 2. Install the packages at the bottom of this file
 
