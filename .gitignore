@@ -7,11 +7,11 @@
 *.vscode
 
 # backend
-/API/bin
-/API/obj
-/API/.env
-/API/UML Diagram/*.drawio
-/API/Migrations/*
+backend/API/bin
+backend/API/obj
+backend/API/.env
+backend/API/UML Diagram/*.drawio
+backend/API/Migrations/*
 *.sln
 
 # testing
