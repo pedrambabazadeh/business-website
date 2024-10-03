@@ -1,9 +1,10 @@
 import './App.css';
+import { Navigation } from './Sections';
 
 function App() {
   return (
     <div>
-      Hello World!
+      <Navigation/>
     </div>
   );
 }
