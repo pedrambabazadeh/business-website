@@ -1,7 +1,10 @@
 import React from 'react'
+import { Grid, Box } from '@mui/material';
 
 export default function NavigationSec() {
   return (
-    <div>NavigationSec</div>
+    <Grid container spacing={12}>
+      <Grid item spacing={4}></Grid>
+    </Grid>
   )
 }
