@@ -1,9 +1,9 @@
 import React from 'react'
 import NavigationStructure from './NavigationStructure'
-import { NavBar } from '../../Components'
+import { NavBar, Logo } from '../../Components'
 
 export default function NavigationSec() {
   return (
-    <NavigationStructure center={<NavBar/>}/>
+    <NavigationStructure left={<Logo/>} center={<NavBar/>}/>
   )
 }
