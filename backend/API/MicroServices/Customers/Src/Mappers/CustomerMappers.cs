@@ -12,7 +12,8 @@ namespace API.MicroServices.Customers.Mappers
                 FirstName = customerModel.FirstName,
                 LastName = customerModel.LastName,
                 Email = customerModel.Email,
-                CompanyName = customerModel.CompanyName
+                CompanyName = customerModel.CompanyName,
+                WebsiteUrl = customerModel.WebsiteUrl
             };
         }
     }

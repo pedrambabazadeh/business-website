@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.MicroServices.ContactForm.Src.Controllers
 {
-    [Route("/api/contact")]
+    [Route("/api/contact_form")]
     [ApiController]
     public class ContactFormController : ControllerBase
     {
@@ -15,7 +15,7 @@ namespace API.MicroServices.ContactForm.Src.Controllers
             this.contactFormRepo = contactFormRepo;
         }
 
-        [HttpPost]
+        [HttpPost("submit")]
         public async Task<IActionResult> Submit([FromBody] ContactFormDto contactFormDto)
         {
             if (!ModelState.IsValid)
@@ -24,8 +24,8 @@ namespace API.MicroServices.ContactForm.Src.Controllers
             var customerModel = await contactFormRepo.CreateCustomerAsync(contactFormDto);
             
             await contactFormRepo.CreateMessageAsync(contactFormDto, customerModel.Id);
-
-            return Created("/api/contact/success", contactFormDto);
+            
+            return Created("/api/contact/submit/success", contactFormDto);
         }
     }
 }

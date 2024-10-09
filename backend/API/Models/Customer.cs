@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace API.Models
@@ -8,8 +9,13 @@ namespace API.Models
         public int Id { get; set; }
         public string FirstName { get; set; } = String.Empty;
         public string LastName { get; set; } = String.Empty;
+
+        [EmailAddress]
         public string Email { get; set; } = String.Empty;
         public string CompanyName { get; set; } = String.Empty;
+        
+        [Url]
+        public string WebsiteUrl { get; set; } = String.Empty;
         public DateTime CreatedOn { get; set; }
     }
 }

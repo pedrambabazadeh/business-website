@@ -12,6 +12,7 @@ backend/API/obj
 backend/API/.env
 backend/API/UML Diagram/*.drawio
 backend/API/Migrations/*
+backend/*.docx
 *.sln
 
 # testing

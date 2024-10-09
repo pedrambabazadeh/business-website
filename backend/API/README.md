@@ -1,4 +1,4 @@
-APIs for different micro services of the application
+Web Application for different micro services.
 
 =========================================
 
@@ -28,13 +28,12 @@ Steps to setup and run the application:
     How to setup SSMS tutorial: https://www.youtube.com/watch?v=SIQhe-yt3mA&list=PL82C6-O4XrHfrGOCPmKmwTO7M0avXyQKc&index=3
 
     dotnet ef migrations add Data
-
     dotnet ef database update
 
 5. Run the program with Swagger to test the end points
 
     dotnet watch run
-
+`
 6. Run the program:
 
     dotnet run

@@ -12,6 +12,7 @@ namespace API.MicroServices.ContactForm.Src.Mappers
                 LastName = contactFormDto.LastName,
                 Email = contactFormDto.Email,
                 CompanyName = contactFormDto.CompanyName,
+                WebsiteUrl = contactFormDto.WebsiteUrl,
                 CreatedOn = contactFormDto.CreatedOn
             };
         }
