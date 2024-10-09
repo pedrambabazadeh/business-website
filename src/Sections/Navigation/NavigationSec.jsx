@@ -4,6 +4,6 @@ import { NavBar } from '../../Components'
 
 export default function NavigationSec() {
   return (
-    <NavigationStructure Left={<NavBar/>}/>
+    <NavigationStructure center={<NavBar/>}/>
   )
 }
