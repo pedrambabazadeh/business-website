@@ -1,10 +1,12 @@
 import './App.css';
-import { Navigation } from './Sections';
+import { Navigation,Header } from './Sections';
 
 function App() {
   return (
     <div>
       <Navigation/>
+      {/* needs to be dynamic from here*/}
+      <Header/>
     </div>
   );
 }
