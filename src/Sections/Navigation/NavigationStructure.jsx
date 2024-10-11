@@ -1,6 +1,6 @@
 import React from 'react'
 import { Grid, Box } from '@mui/material';
-//import { Search } from '@mui/icons-material';
+import { Search, Menu } from '@mui/icons-material';
 
 export default function NavigationStructure(props) {
   return (
@@ -12,13 +12,20 @@ export default function NavigationStructure(props) {
       </Grid>
       <Grid item xs={2}>
       <Box  p={2}>
-       {/* <Grid item>
+        <Grid item>
           <Grid item xs={12}>
               <Box p={2}>
-                <Search/>
+                <Grid container spacing={4}>
+                  <Grid item xs={12}>
+                    <Box>
+                      <Search/>
+                      <Menu/>
+                    </Box>
+                  </Grid>
+                </Grid>
               </Box>
           </Grid>
-        </Grid> */}
+        </Grid>
       </Box>
       </Grid>
     </Grid>
