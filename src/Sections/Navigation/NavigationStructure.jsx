@@ -10,7 +10,15 @@ export default function NavigationStructure(props) {
       <Box  p={2}>{props.center}</Box>
       </Grid>
       <Grid item xs={2}>
-      <Box  p={2}>Hello</Box>
+      <Box  p={2}>
+        <Grid container>
+          <Grid item xs={12}>
+              <Box>
+                {}
+              </Box>
+          </Grid>
+        </Grid>
+      </Box>
       </Grid>
     </Grid>
   )
