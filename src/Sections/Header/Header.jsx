@@ -3,7 +3,7 @@ import './header.css'
 import { Button } from '@mui/material'
 
 export default function Header() {
-    let coverPhoto= "/Home%20Wallpaper.png"
+    let coverPhoto= "/Home%20Wallpaper1.png"
     let text = {header: 'web development services',
                 body: 'we design and build mindustry-leading web-based products to improve your business'
     }
