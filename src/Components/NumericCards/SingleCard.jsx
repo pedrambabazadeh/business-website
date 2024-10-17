@@ -1,7 +1,10 @@
 import React from 'react'
 
-export default function SingleCard() {
+export default function SingleCard(props) {
   return (
-    <div>SingleCard</div>
+    <div>
+        <h2>{props.title}</h2>
+        <p>{props.data}</p>
+    </div>
   )
 }

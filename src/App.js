@@ -1,5 +1,6 @@
 import './App.css';
 import { Navigation,Header } from './Sections';
+import { NumericCards } from './Components';
 
 function App() {
   return (
@@ -7,6 +8,7 @@ function App() {
       <Navigation/>
       {/* needs to be dynamic from here*/}
       <Header/>
+      <NumericCards/>
     </div>
   );
 }
