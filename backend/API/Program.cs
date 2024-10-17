@@ -8,8 +8,8 @@ using API.MicroServices.Blogs.Interfaces;
 using API.MicroServices.Blogs.Repositories;
 using API.MicroServices.Messages.Interfaces;
 using API.MicroServices.Messages.Repositories;
-using API.MicroServices.Users.Interfaces;
-using API.MicroServices.Users.Services;
+using API.MicroServices.Users.Src.Interfaces;
+using API.MicroServices.Users.Src.Services;
 
 using DotNetEnv;
 using Microsoft.EntityFrameworkCore;
@@ -25,8 +25,17 @@ builder.Configuration
     .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
     .AddEnvironmentVariables(); 
 
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins",
+        builder =>
+        {
+            builder.AllowAnyOrigin()
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+        });
+});
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -75,7 +84,8 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(options => {
     options.Password.RequireNonAlphanumeric = true;
     options.Password.RequiredLength = 12;
 })
-.AddEntityFrameworkStores<ApplicationDbContext>();
+.AddEntityFrameworkStores<ApplicationDbContext>()
+.AddDefaultTokenProviders();
 
 builder.Services.AddAuthentication(options => {
     options.DefaultAuthenticateScheme =
@@ -104,15 +114,26 @@ builder.Services.AddScoped<IMessageRepository, MessageRepository>();
 builder.Services.AddScoped<IBlogRepository, BlogRepository>();
 
 builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<IEmailService>(provider => new EmailService(
+    builder.Configuration["EmailService:SmtpHost"],
+    builder.Configuration["EmailService:SmtpPort"],
+    builder.Configuration["EmailService:SmtpUsername"],
+    builder.Configuration["EmailService:SmtpPassword"],
+    builder.Configuration["EmailService:FromEmail"],
+    builder.Configuration["EmailService:FromName"]
+));
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+app.UseCors("AllowAllOrigins");
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseRouting();
 
 app.UseHttpsRedirection();
 

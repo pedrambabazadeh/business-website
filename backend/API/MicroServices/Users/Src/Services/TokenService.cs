@@ -1,11 +1,11 @@
 using API.Models;
-using API.MicroServices.Users.Interfaces;
+using API.MicroServices.Users.Src.Interfaces;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 
-namespace API.MicroServices.Users.Services
+namespace API.MicroServices.Users.Src.Services
 {
     public class TokenService : ITokenService
     {

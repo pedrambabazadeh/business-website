@@ -1,11 +1,11 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace API.MicroServices.Users.DTOs
+namespace API.MicroServices.Users.Src.DTOs
 {
     public class LoginDto
     {
         [Required]
-        public string? UserName { get; set; }
+        public string? Username { get; set; }
 
         [Required]
         public string? Password { get; set; }

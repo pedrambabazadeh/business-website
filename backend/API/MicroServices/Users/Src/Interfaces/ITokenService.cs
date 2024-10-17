@@ -1,6 +1,6 @@
 using API.Models;
 
-namespace API.MicroServices.Users.Interfaces
+namespace API.MicroServices.Users.Src.Interfaces
 {
     public interface ITokenService
     {

@@ -1,11 +1,13 @@
 using API.Models;
-using API.MicroServices.Users.DTOs;
-using API.MicroServices.Users.Interfaces;
+using API.MicroServices.Users.Src.DTOs;
+using API.MicroServices.Users.Src.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace API.MicroServices.Users.Controllers
+using System.Web;
+
+namespace API.MicroServices.Users.Src.Controllers
 {
     [Route("api/account")]
     [ApiController]
@@ -14,12 +16,16 @@ namespace API.MicroServices.Users.Controllers
         private readonly UserManager<AppUser> userManager;
         private readonly SignInManager<AppUser> signinManager;
         private readonly ITokenService tokenService;
+        private readonly IEmailService emailService;
 
-        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signinManager, ITokenService tokenService)
+        public AccountController(
+            UserManager<AppUser> userManager, SignInManager<AppUser> signinManager,
+            ITokenService tokenService, IEmailService emailService)
         {
             this.userManager = userManager;
             this.signinManager = signinManager;
             this.tokenService = tokenService;
+            this.emailService = emailService;
         }
 
         [HttpPost("register")]
@@ -32,8 +38,11 @@ namespace API.MicroServices.Users.Controllers
 
                 var appUser = new AppUser
                                 {
-                                    UserName = registerDto.UserName,
-                                    Email = registerDto.Email
+                                    FirstName = registerDto.FirstName,
+                                    LastName = registerDto.LastName,
+                                    UserName = registerDto.Username,
+                                    Email = registerDto.Email,
+                                    Category = registerDto.Category
                                 };
 
                 var createdUser = await userManager.CreateAsync(appUser, registerDto.Password);
@@ -48,7 +57,7 @@ namespace API.MicroServices.Users.Controllers
                     return Ok (
                         new NewUserDto
                         {
-                            UserName = appUser.UserName,
+                            Username = appUser.UserName,
                             Email = appUser.Email,
                             Token = tokenService.Create(appUser)
                         }
@@ -70,7 +79,7 @@ namespace API.MicroServices.Users.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var user = await userManager.Users.FirstOrDefaultAsync(u => u.UserName.ToLower() == loginDto.UserName.ToLower());
+            var user = await userManager.Users.FirstOrDefaultAsync(u => u.UserName.ToLower() == loginDto.Username.ToLower());
 
             if (user is null)
                 return Unauthorized("Username not found and/or password is not valid");
@@ -83,11 +92,58 @@ namespace API.MicroServices.Users.Controllers
             return Ok (
                 new NewUserDto
                 {
-                    UserName = user.UserName,
+                    Username = user.UserName,
                     Email = user.Email,
                     Token = tokenService.Create(user)
                 }
             );
+        }
+
+        [HttpPost("forgot-password")]
+        public async Task<IActionResult> SendPasswordResetLink([FromBody] SendPasswordResetLinkDto sendPasswordResetLinkDto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var user = await userManager.Users.FirstOrDefaultAsync(u => u.Email.ToLower() == sendPasswordResetLinkDto.Email.ToLower());
+
+            if (user is null)
+                return Unauthorized("User with this email doesn't exist");
+
+            var resetToken = await userManager.GeneratePasswordResetTokenAsync(user);
+
+            var encodedToken = HttpUtility.UrlEncode(resetToken);
+
+            var resetUrl = $"http://localhost:5264/api/account/reset-password?token={encodedToken}&email={user.Email}";
+
+            var emailSent = await emailService.SendResetPasswordEmail(user.Email, resetUrl); // Need company email to test with.
+
+            if (!emailSent)
+                return StatusCode(500, "Failed to send reset password link. Try again!");
+
+            return Ok("Password reset link has been sent to your email.");
+        }
+
+        // Need company email to test with.
+        [HttpPost("reset-password")]
+        public async Task<IActionResult> ResetPassword([FromBody] PasswordResetDto passwordResetDto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var user = await userManager.Users.FirstOrDefaultAsync(u => u.Email.ToLower() == passwordResetDto.Email.ToLower());
+
+            if (user is null)
+                return Unauthorized("Invalid email");
+
+            var decodedToken = HttpUtility.UrlDecode(passwordResetDto.EncodedResetToken);
+
+            var result = await userManager.ResetPasswordAsync(user, decodedToken, passwordResetDto.NewPassword);
+
+            if (!result.Succeeded)
+                return BadRequest("Password reset failed. Please ensure the token is correct and the new password meets the requirements.");
+
+            return Ok("Password has been successfuly reset.");
         }
     }
 }

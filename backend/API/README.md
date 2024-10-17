@@ -12,21 +12,31 @@ Steps to setup and run the application:
 
 3. Create a .env file then copy and paste these data into it exactly as they are:
 
+    *Modify the contents inside { }
+
+    Domain="{http://localhost:5264}"
+
     ConnectionStrings__DefaultConnection="Data Source={PC Name}\\SQLEXPRESS;Initial Catalog={Database Name};Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"
 
-    *Modify {PC Name} and {Database Name} in step 3 below!
+    JWT__Issuer="{http://localhost:5264}"
 
-    JWT__Issuer="http://localhost:5264"
-
-    JWT__Audience="http://localhost:5264"
+    JWT__Audience="{http://localhost:5264}"
 
     JWT__SigninKey="odokw0384hf-1gy5g5ujkc%bv9v#(>vodbspt9n6g)vjsnq521%!#~3ij32rlf3-2fDF#@F#fe0w-=nfjnlmn8fyui3ndf_#(@G$W)fghrehj7luyghfefwfgrhjkyl.ilkyfjijlHJHDGRJKYT%Y^$&*^&O$54675u6uT%&5T$U%^4yR%U5RY"
+
+    EmailService__SmtpHost="smtp.gmail.com"
+    EmailService__SmtpPort=587
+    EmailService__SmtpUsername="{your-gmail-username@gmail.com}"
+    EmailService__SmtpPassword="{your-gmail-password}"
+    EmailService__FromEmail="{no-reply@yourdomain.com}"
+    EmailService__FromName="{COMPANY NAME}"
 
 4. Database Commands:
 
     Download SQL Server Management Studio (SSMS) from Microsoft: https://aka.ms/ssmsfullsetup
     How to setup SSMS tutorial: https://www.youtube.com/watch?v=SIQhe-yt3mA&list=PL82C6-O4XrHfrGOCPmKmwTO7M0avXyQKc&index=3
 
+    dotnet ef migrations remove
     dotnet ef migrations add Data
     dotnet ef database update
 

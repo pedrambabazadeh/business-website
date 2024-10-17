@@ -1,11 +1,16 @@
 using System.ComponentModel.DataAnnotations;
+using API.Models;
 
-namespace API.MicroServices.Users.DTOs
+namespace API.MicroServices.Users.Src.DTOs
 {
     public class RegisterDto
     {
         [Required]
-        public string? UserName { get; set; }
+        public string? FirstName { get; set; }
+        [Required]
+        public string? LastName { get; set; }
+        [Required]
+        public string? Username { get; set; }
 
         [Required]
         [EmailAddress]
@@ -13,5 +18,7 @@ namespace API.MicroServices.Users.DTOs
 
         [Required]
         public string? Password { get; set; }
+        [Required]
+        public Category Category { get; set; }
     }
 }

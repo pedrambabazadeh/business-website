@@ -15,12 +15,4 @@ namespace API.Models
         public string AppUserId { get; set; } = string.Empty;
         public AppUser? AppUser { get; set; }
     }
-
-    public enum Category
-    {
-        frontend,
-        backend,
-        design,
-        marketing
-    }
 }
