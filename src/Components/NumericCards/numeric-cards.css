@@ -1,0 +1,14 @@
+.numeric-cards
+{
+    justify-content: space-around;
+}
+
+.numeric-cards>div
+{
+    background-color: #ffffff;
+    color: grey;/*change*/
+    width: 12em;/*change*/
+    height: 9em;/*change*/
+    border-radius: 10px;
+    text-align: center;
+}
