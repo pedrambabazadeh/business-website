@@ -1,9 +1,10 @@
 import React from 'react'
 
-export default function Part() {
+export default function Part(props) {
   return (
     <section>
-        One part
+        <h3>{props.title}</h3>
+        <p>{props.data}</p>
     </section>
   )
 }
