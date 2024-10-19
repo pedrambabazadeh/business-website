@@ -1,6 +1,6 @@
 using API.Models;
 
-namespace API.MicroServices.Blogs.Queries
+namespace API.MicroServices.CMS.Src.Queries
 {
     public class BlogQuery
     {

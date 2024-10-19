@@ -9,9 +9,9 @@ namespace API.Models
         public int Id { get; set; }
 
         [EmailAddress]
-        public string Email { get; set; } = String.Empty;
+        public string Email { get; set; } = string.Empty;
         
-        public string Content { get; set; } = String.Empty;
+        public string Content { get; set; } = string.Empty;
         public DateTime CreatedOn { get; set; }
         public int CustomerID { get; set; }
     }

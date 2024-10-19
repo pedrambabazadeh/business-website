@@ -1,12 +1,10 @@
 using API.Data;
 using API.Models;
-using API.MicroServices.Blogs.DTOs;
-using API.MicroServices.Blogs.Interfaces;
-using API.MicroServices.Blogs.Mappers;
-using API.MicroServices.Blogs.Queries;
+using API.MicroServices.CMS.Src.Interfaces;
+using API.MicroServices.CMS.Src.Queries;
 using Microsoft.EntityFrameworkCore;
 
-namespace API.MicroServices.Blogs.Repositories
+namespace API.MicroServices.CMS.Src.Repositories
 {
     public class BlogRepository : IBlogRepository
     {
@@ -17,10 +15,8 @@ namespace API.MicroServices.Blogs.Repositories
             this.context = context;
         }
 
-        public async Task<Blog> CreateAsync(CreateBlogDto blogDto)
+        public async Task<Blog> CreateAsync(Blog blogModel)
         {
-            var blogModel = blogDto.ToBlogFromCreateBlogDto();
-
             await context.Blogs.AddAsync(blogModel);
             await context.SaveChangesAsync();
 
@@ -32,7 +28,7 @@ namespace API.MicroServices.Blogs.Repositories
             var blogs = context.Blogs.AsQueryable();
 
             if (query.Cat.HasValue)
-                blogs = blogs.Where(b => b.Cat == query.Cat.Value);
+                blogs = blogs.Where(b => b.Category == query.Cat.Value);
 
             if (!string.IsNullOrWhiteSpace(query.Author))
                 blogs = blogs.Where(b => b.Author.Contains(query.Author));
@@ -56,36 +52,26 @@ namespace API.MicroServices.Blogs.Repositories
             return await context.Blogs.FirstOrDefaultAsync(b => b.Id == id);
         }
 
-        public async Task<Blog?> UpdateAsync(int id, UpdateBlogDto blogDto)
+        public async Task<Blog?> UpdateAsync(Blog existingBlogModel, Blog updatedBlogModel)
         {
-            var existingBlog = await context.Blogs.FirstOrDefaultAsync(b => b.Id == id);
-
-            if (existingBlog is null)
-                return null;
-
-            existingBlog.Author = existingBlog.Author;
-            existingBlog.Cat = blogDto.Cat;
-            existingBlog.Title = blogDto.Title;
-            existingBlog.Content = blogDto.Content;
-            existingBlog.CreatedOn = existingBlog.CreatedOn;
-            existingBlog.ModifiedOn = blogDto.ModifiedOn;
+            existingBlogModel.Author = existingBlogModel.Author;
+            existingBlogModel.Category = existingBlogModel.Category;
+            existingBlogModel.Title = updatedBlogModel.Title;
+            existingBlogModel.Content = updatedBlogModel.Content;
+            existingBlogModel.CreatedOn = existingBlogModel.CreatedOn;
+            existingBlogModel.ModifiedOn = updatedBlogModel.ModifiedOn;
 
             await context.SaveChangesAsync();
 
-            return existingBlog;
+            return existingBlogModel;
         }
 
-        public async Task<Blog?> DeleteAsync(int id)
+        public async Task<Blog?> DeleteAsync(Blog existingBlogModel)
         {
-            var existingBlog = await context.Blogs.FirstOrDefaultAsync(b => b.Id == id);
-
-            if (existingBlog is null)
-                return null;
-
-            context.Blogs.Remove(existingBlog);
+            context.Blogs.Remove(existingBlogModel);
             await context.SaveChangesAsync();
 
-            return existingBlog;
+            return existingBlogModel;
         }
     }
 }

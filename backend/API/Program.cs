@@ -4,8 +4,8 @@ using API.MicroServices.ContactForm.Src.Interfaces;
 using API.MicroServices.ContactForm.Src.Repositories;
 using API.MicroServices.Customers.Interfaces;
 using API.MicroServices.Customers.Repositories;
-using API.MicroServices.Blogs.Interfaces;
-using API.MicroServices.Blogs.Repositories;
+using API.MicroServices.CMS.Src.Interfaces;
+using API.MicroServices.CMS.Src.Repositories;
 using API.MicroServices.Messages.Interfaces;
 using API.MicroServices.Messages.Repositories;
 using API.MicroServices.Users.Src.Interfaces;
@@ -104,7 +104,9 @@ builder.Services.AddAuthentication(options => {
         ValidateIssuerSigningKey = true,
         IssuerSigningKey = new SymmetricSecurityKey(
             System.Text.Encoding.UTF8.GetBytes(builder.Configuration["JWT:SigninKey"])
-        )
+        ),
+        ValidateLifetime = true,
+        ClockSkew = TimeSpan.Zero
     };
 });
 
@@ -136,6 +138,9 @@ if (app.Environment.IsDevelopment())
 app.UseRouting();
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllers();
 

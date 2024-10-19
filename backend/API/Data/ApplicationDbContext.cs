@@ -16,13 +16,11 @@ namespace API.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-
-            builder.Entity<Blog>(x => x.HasKey(b => new { b.AppUserId }));
             
             builder.Entity<Blog>()
-                .HasOne(u => u.AppUser)
+                .HasOne(b => b.AppUser)
                 .WithMany(u => u.Blogs)
-                .HasForeignKey(p => p.AppUserId);
+                .HasForeignKey(b => b.AppUserId);
 
             List<IdentityRole> roles = new() {
                 new IdentityRole {

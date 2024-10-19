@@ -6,14 +6,9 @@ namespace API.MicroServices.ContactForm.Src.Controllers
 {
     [Route("/api/contact_form")]
     [ApiController]
-    public class ContactFormController : ControllerBase
+    public class ContactFormController(IContactFormRepository contactFormRepo) : ControllerBase
     {
-        private readonly IContactFormRepository contactFormRepo;
-
-        public ContactFormController(IContactFormRepository contactFormRepo)
-        {
-            this.contactFormRepo = contactFormRepo;
-        }
+        private readonly IContactFormRepository contactFormRepo = contactFormRepo;
 
         [HttpPost("submit")]
         public async Task<IActionResult> Submit([FromBody] ContactFormDto contactFormDto)
