@@ -16,7 +16,7 @@ export default function Header() {
         <p>
           {text.body}
         </p>
-        <Button variant='outlined' color='#F58634'>Join Us</Button>
+        <Button variant='outlined' color='primary'>Join Us</Button>
       </div>
     </header>
   )
