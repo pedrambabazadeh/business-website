@@ -1,6 +1,6 @@
 .numeric-cards
 {
-    justify-content: space-around;
+    justify-content: space-evenly;
 }
 
 .numeric-cards>div

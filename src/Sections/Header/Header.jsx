@@ -11,7 +11,7 @@ export default function Header() {
   return (
     <header style={{backgroundImage: `url(${coverPhoto})`}}>
       <Grid container spacing={2}>
-        <Grid item xs={0} lg={1}></Grid> 
+        <Grid item xs={0} lg={1}></Grid>
         <Grid item xs={10}>
           <Box p={2}>
           <div className='header-text'>
@@ -29,7 +29,6 @@ export default function Header() {
           <NumericCards/>
         </Grid>
       </Grid>
-     
     </header>
   )
 }
