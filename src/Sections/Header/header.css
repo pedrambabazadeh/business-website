@@ -1,6 +1,6 @@
 header{
     height: 500px;
-    background-size: 95%;
+    background-size: contain;
     background-position-x: center;
     background-repeat: no-repeat;
     display: flex;

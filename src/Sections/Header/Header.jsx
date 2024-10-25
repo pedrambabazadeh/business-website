@@ -1,6 +1,7 @@
 import React from 'react'
 import './header.css'
-import { Button } from '@mui/material'
+import { Button, Grid, Box } from '@mui/material'
+import { NumericCards } from '../../Components'
 
 export default function Header() {
     let coverPhoto= "/Home%20Wallpaper1.png"
@@ -9,15 +10,26 @@ export default function Header() {
     }
   return (
     <header style={{backgroundImage: `url(${coverPhoto})`}}>
-      <div className='header-text'>
-        <h2>
-          {text.header}
-        </h2>
-        <p>
-          {text.body}
-        </p>
-        <Button variant='outlined' color='primary'>Join Us</Button>
-      </div>
+      <Grid container spacing={2}>
+        <Grid item xs={0} lg={1}></Grid> 
+        <Grid item xs={10}>
+          <Box p={2}>
+          <div className='header-text'>
+          <h2>
+            {text.header}
+          </h2>
+          <p>
+            {text.body}
+          </p>
+          <Button variant='outlined' color='primary'>Join Us</Button>
+          </div>
+          </Box>
+        </Grid>
+        <Grid item xs={12}>
+          <NumericCards/>
+        </Grid>
+      </Grid>
+     
     </header>
   )
 }

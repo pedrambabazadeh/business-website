@@ -22,7 +22,6 @@ function App() {
         <Navigation/>
         {/* needs to be dynamic from here*/}
         <Header/>
-        <NumericCards/>
 
       </div>
     </ThemeProvider>
