@@ -1,6 +1,6 @@
 import './App.css';
 import { Navigation,Header } from './Sections';
-import { NumericCards } from './Components';
+import { Part } from './Components';
 import { ThemeProvider } from '@emotion/react';
 import { createTheme } from '@mui/material';
 
@@ -22,7 +22,7 @@ function App() {
         <Navigation/>
         {/* needs to be dynamic from here*/}
         <Header/>
-
+        <Part title="test" text="new part is working successfully" color="#ffffff"/>
       </div>
     </ThemeProvider>
   );
