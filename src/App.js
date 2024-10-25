@@ -22,7 +22,7 @@ function App() {
         <Navigation/>
         {/* needs to be dynamic from here*/}
         <Header/>
-        <Part title="test" text="new part is working successfully" color="#ffffff"/>
+        <Part title="test" data="new part is working successfully" color="#ffffff"/>
       </div>
     </ThemeProvider>
   );

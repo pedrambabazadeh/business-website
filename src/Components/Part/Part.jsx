@@ -3,7 +3,7 @@ import './part.css'
 
 export default function Part(props) {
   return (
-    <section>
+    <section className='main-section'>
         <h3>{props.title}</h3>
         <div className='separator'
           style={{backgroundColor: props.color,
