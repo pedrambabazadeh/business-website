@@ -11,6 +11,7 @@ export default function Part(props) {
           &nbsp;
         </div>
         <p>{props.data}</p>
+        {props.children}
     </section>
   )
 }
