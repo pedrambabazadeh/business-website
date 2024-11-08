@@ -1,6 +1,5 @@
 import './App.css';
-import { Navigation,Header, Services } from './Sections';
-import { Part } from './Components';
+import { Navigation,Header, Services, Footer } from './Sections';
 import { ThemeProvider } from '@emotion/react';
 import { createTheme } from '@mui/material';
 
@@ -23,6 +22,8 @@ function App() {
         {/* needs to be dynamic from here*/}
         <Header/>
         <Services/>
+        {/*until here*/}
+        <Footer/>
       </div>
     </ThemeProvider>
   );
