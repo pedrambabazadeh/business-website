@@ -1,9 +1,9 @@
 import React from 'react';
+import './contact-us.css'
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { TextField, Button } from '@mui/material';
+import { TextField, Button, Grid2 as Grid, TextareaAutosize} from '@mui/material';
 import {default as validationSchema} from './Validation_yup';
-import {default as HandleSubmit} from './HandleSubmit'
-
+import {default as HandleSubmit} from './HandleSubmit' 
 
 const ContactUs = () => {
   return (
@@ -20,13 +20,27 @@ const ContactUs = () => {
       onSubmit={HandleSubmit}
     >
       {({ isSubmitting }) => (
-         <Form>
-         <Field name="firstName" placeholder="First Name" />
-         <Field name="lastName" placeholder="Last Name" />
-         <Field name="email" type="email" placeholder="Email" />
-         <Field name="companyName" placeholder="Company Name" />
-         <Field name="websiteUrl" placeholder="Website URL" />
-         <Field name="content" component="textarea" placeholder="Message Content" />
+         <Form className='contact-form_form'>
+            <Grid container spacing={2}>
+              <Grid size={{ xs: 12, md: 6}}>
+                <Field as={TextField} fullWidth name="firstName" placeholder="First Name"/>
+              </Grid>
+              <Grid size={{ xs: 12, md: 6}}>
+              <Field as={TextField} fullWidth name="lastName" placeholder="Last Name"/>
+              </Grid>
+              <Grid size={{ xs: 12, md: 6}}>
+                <Field as={TextField} fullWidth name="email" type="email" placeholder="Email" />
+              </Grid>
+              <Grid size={{ xs: 12, md: 6}}>
+                <Field as={TextField} fullWidth name="companyName" placeholder="Company Name" />
+              </Grid>
+              <Grid size={{ xs: 12, md: 6}}>
+                <Field as={TextField} fullWidth name="websiteUrl" placeholder="Website URL" />
+              </Grid>
+              <Grid size={{ xs: 12}}>
+                <Field as={TextField} fullWidth name="content" placeholder="Message Content" rows={4}/>
+              </Grid>
+            </Grid>
          <label>
            <Field type="checkbox" name="gdpr" />
            Agree to GDPR terms
