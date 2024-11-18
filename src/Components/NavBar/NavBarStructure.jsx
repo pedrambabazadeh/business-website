@@ -2,7 +2,8 @@ import React from 'react'
 
 export default function NavBarStructure(props) {
   return (
-    <ul className='nav-bar'>
+  <div>
+    <ul className='nav-bar_ul'>
         {props.items.map((item, index) => {
             return(
             <li key={index}>
@@ -11,5 +12,6 @@ export default function NavBarStructure(props) {
             )
         })}
     </ul>
+  </div>
   )
 }
