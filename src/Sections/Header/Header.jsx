@@ -21,7 +21,13 @@ export default function Header() {
           <p>
             {text.body}
           </p>
-          <Button variant='outlined' color='primary'>Join Us</Button>
+          <Button
+            style={{ borderRadius: '24px', padding: '12px 20px'}} 
+            variant='outlined' 
+            color='secondary'
+          >
+            Let's work together
+            </Button>
           </div>
           </Box>
         </Grid>
