@@ -2,8 +2,8 @@ import React from 'react'
 
 export default function SingleCard(props) {
   return (
-    <div>
-        <h2>{props.title}</h2>
+    <div className='single-card'>
+        <p className='single-card_number'>{props.title}</p>
         <p>{props.data}</p>
     </div>
   )
