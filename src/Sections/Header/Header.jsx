@@ -14,7 +14,7 @@ export default function Header() {
         <Grid item xs={0} lg={1}></Grid>
         <Grid item xs={10}>
           <Box p={2}>
-          <div className='header-text'>
+          <div className='header_text'>
           <h2>
             {text.header}
           </h2>
@@ -22,8 +22,9 @@ export default function Header() {
             {text.body}
           </p>
           <Button
-            style={{ borderRadius: '24px', padding: '12px 20px'}} 
-            variant='outlined' 
+            style={{ borderRadius: '24px', padding: '12px 20px'}}
+            className='header_button__back'
+            variant='outlined'
             color='secondary'
           >
             Let's work together

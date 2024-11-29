@@ -8,3 +8,8 @@ header{
     justify-content: space-evenly;
 }
 
+.header_button__back:hover
+{
+   background-image: linear-gradient(90deg, #C52F91, #F58634, #2FC5A6 );
+   color: #ffffff;
+}
